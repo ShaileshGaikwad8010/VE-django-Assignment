@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Analysis</title>
+    
+</head>
+<style>
+    body {
+        font-family: 'Helvetica', sans-serif;
+        background: linear-gradient(135deg, #343a40, #495057);
+        color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: fadeInBackground 1.5s ease-in-out;
+    }
+    
+    h1, h2 {
+        text-align: center;
+        animation: textFadeIn 1s ease-in-out;
+    }
+    
+    h1 {
+        font-size: 3em;
+        color: #17a2b8;
+        margin-bottom: 30px;
+    }
+    
+    h2 {
+        font-size: 2em;
+        color: #ffc107;
+        margin-top: 20px;
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transform: scale(0.9);
+        transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    }
+    
+    img:hover {
+        transform: scale(1.05) rotateY(5deg);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    }
+    
+    .content-section {
+        width: 100%;
+        max-width: 800px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        margin: 20px 0;
+        padding: 20px;
+        border: 2px solid transparent;
+        transition: border 0.3s ease;
+        text-align: center;
+    }
+    
+    .content-section:hover {
+        border: 2px solid #17a2b8;
+    }
+    
+    table {
+        width: 100%;
+        margin: 0 auto; /* Center the table */
+        border-collapse: collapse; /* Ensures borders do not overlap */
+    }
+    
+    table th, table td {
+        padding: 10px;
+        border: 1px solid #17a2b8;
+        color: #f8f9fa;
+    }
+    
+    table th {
+        background-color: #343a40;
+    }
+    
+    table td {
+        background-color: #495057;
+    }
+    
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #17a2b8;
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #138496;
+    }
+    
+    @keyframes fadeInBackground {
+        from {
+            background: #000;
+        }
+        to {
+            background: linear-gradient(135deg, #343a40, #495057);
+        }
+    }
+    
+    @keyframes textFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+</style>
+<body>
+    <h1>Data Analysis Results</h1>
+    
+    <div class="content-section">
+        <h2>First Few Rows</h2>
+        {{ head|safe }}
+    </div>
+
+    <div class="content-section">
+        <h2>Summary Statistics</h2>
+        {{ description|safe }}
+    </div>
+
+    <div class="content-section">
+        <h2>Missing Values</h2>
+        {{ missing_values|safe }}
+    </div>
+
+    <div class="content-section">
+        <h2>Visualizations</h2>
+        {% for plot in plots %}
+            <img src="{{ plot }}" alt="Plot">
+        {% endfor %}
+    </div>
+</body>
+</html>
